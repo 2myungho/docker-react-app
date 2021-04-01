@@ -1,0 +1,16 @@
+sudo: required
+
+lanuage: generic
+
+services:
+  - docker
+
+berfore_install:
+  - echo "start createing an image with dockerfile"
+  - docker build -t dlaudghtn/docker-react-app -f Dockerfile.dev .
+
+script: 
+  - docker run -e CI=true dlaudghtn/docker/react/app npm run test -- --coverage
+
+after_success:
+  - echo "Test success"
